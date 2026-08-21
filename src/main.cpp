@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <nlohmann/json.hpp>
+#include <fstream>
 
 #include "RiotAPI.h"
 
@@ -47,6 +48,10 @@ int main() {
 
     nlohmann::json match = riot.getMatch(matchId);
 
+    std::ofstream file("match.json");
+    file << match.dump(4);
+    file.close();
+
     std::cout << "Match ID: "
             << match["metadata"]["matchId"]
             << "\n";
@@ -63,5 +68,23 @@ int main() {
             << match["info"]["participants"].size()
             << "\n";
 
+    for(int participant = 0; participant < match["info"]["participants"].size(); ++participant) {
+        if (match["info"]["participants"][participant]["puuid"] == puuid) {
+            std::cout << "\nYour stats:\n";
+            std::cout << "Champion: "
+                    << match["info"]["participants"][participant]["championName"]
+                    << "\n";
+            std::cout << "Kills: "
+                    << match["info"]["participants"][participant]["kills"]
+                    << "\n";
+            std::cout << "Deaths: "
+                    << match["info"]["participants"][participant]["deaths"]
+                    << "\n";
+            std::cout << "Assists: "
+                    << match["info"]["participants"][participant]["assists"]
+                    << "\n";
+            break;
+        }
+    }
     return 0;
 }
