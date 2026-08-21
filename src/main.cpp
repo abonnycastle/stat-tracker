@@ -2,7 +2,7 @@
 #include <vector>
 #include <nlohmann/json.hpp>
 
-#include "../include/RiotAPI.h"
+#include "RiotAPI.h"
 
 int main() {
 
