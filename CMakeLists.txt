@@ -11,6 +11,7 @@ find_package(CURL REQUIRED)
 add_executable(tracker
     src/main.cpp
     src/RiotAPI.cpp
+    src/DataDragon.cpp
 )
 
 target_include_directories(tracker PRIVATE

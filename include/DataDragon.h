@@ -8,4 +8,6 @@ public:
     DataDragon();
     std::string getItemName(int itemID);
 
+private:
+    nlohmann::json items;
 };

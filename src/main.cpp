@@ -4,10 +4,14 @@
 #include <fstream>
 
 #include "RiotAPI.h"
+#include "GameStats.h"
+#include "DataDragon.h"
 
 int main() {
 
     RiotAPI riot;
+    DataDragon data;
+    GameStats stats;
 
     std::string gameName;
     std::string tagLine;
@@ -70,19 +74,18 @@ int main() {
 
     for(int participant = 0; participant < match["info"]["participants"].size(); ++participant) {
         if (match["info"]["participants"][participant]["puuid"] == puuid) {
-            std::cout << "\nYour stats:\n";
-            std::cout << "Champion: "
-                    << match["info"]["participants"][participant]["championName"]
-                    << "\n";
-            std::cout << "Kills: "
-                    << match["info"]["participants"][participant]["kills"]
-                    << "\n";
-            std::cout << "Deaths: "
-                    << match["info"]["participants"][participant]["deaths"]
-                    << "\n";
-            std::cout << "Assists: "
-                    << match["info"]["participants"][participant]["assists"]
-                    << "\n";
+                stats.championName = match["info"]["participants"][participant]["championName"];
+                stats.kills = match["info"]["participants"][participant]["kills"];
+                stats.deaths = match["info"]["participants"][participant]["deaths"];
+                stats.assists = match["info"]["participants"][participant]["assists"];
+                stats.item0 = data.getItemName(match["info"]["participants"][participant]["item0"]);
+                stats.item1 = data.getItemName(match["info"]["participants"][participant]["item1"]);
+                stats.item2 = data.getItemName(match["info"]["participants"][participant]["item2"]);
+                stats.item3 = data.getItemName(match["info"]["participants"][participant]["item3"]);
+                stats.item4 = data.getItemName(match["info"]["participants"][participant]["item4"]);
+                stats.item5 = data.getItemName(match["info"]["participants"][participant]["item5"]);
+                stats.item6 = data.getItemName(match["info"]["participants"][participant]["item6"]);
+                stats.displayStats();
             break;
         }
     }
