@@ -86,8 +86,15 @@ int main() {
                 stats.item5 = data.getItemName(match["info"]["participants"][participant]["item5"]);
                 stats.item6 = data.getItemName(match["info"]["participants"][participant]["item6"]);
                 stats.displayStats();
+
+                int mainRuneID = match["info"]["participants"][participant]["perks"]["styles"][0]["selections"][0]["perk"];
+                int mainStyleID = match["info"]["participants"][participant]["perks"]["styles"][0]["style"];
+                std::cout << mainRuneID << "\n";
+                std::cout << mainStyleID << "\n";
+                std::cout << data.getRuneName(mainRuneID, mainStyleID);
             break;
         }
     }
+
     return 0;
 }
