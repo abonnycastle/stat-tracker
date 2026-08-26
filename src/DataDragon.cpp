@@ -8,7 +8,7 @@
 
 DataDragon::DataDragon() {
 
-    std::ifstream itemFile("data/ddragon/item.json");
+    std::ifstream itemFile("data/12.6.1/data/en_US/item.json");
 
     if (!itemFile.is_open()) {
         std::cerr << "Could not open item.json\n";
