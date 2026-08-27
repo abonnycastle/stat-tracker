@@ -14,6 +14,13 @@ struct GameStats {
     std::string item4;
     std::string item5;
     std::string item6;
+    std::string mainKeyStone;
+    std::string mainRune1;
+    std::string mainRune2;
+    std::string mainRune3;
+    std::string subStyle;
+    std::string subRune1;
+    std::string subRune2;
 
     void displayStats(){
         std::cout << "\nYour stats:\n";
@@ -29,5 +36,12 @@ struct GameStats {
         std::cout << "\nItem 5: " << item4;
         std::cout << "\nItem 6: " << item5;
         std::cout << "\nTrinket: " << item6;
+        std::cout << "\n\nRunes:\n";
+        std::cout << "\nMain Keystone: " << mainKeyStone;
+        std::cout << "\nMain Rune 1: " << mainRune1;
+        std::cout << "\nMain Rune 2: " << mainRune2;
+        std::cout << "\nMain Rune 3: " << mainRune3;
+        std::cout << "\nSub Rune 1: " << subRune1;
+        std::cout << "\nSub Rune 2: " << subRune2;
     };
 };

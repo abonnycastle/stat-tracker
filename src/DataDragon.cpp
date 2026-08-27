@@ -5,6 +5,7 @@
 #include <string>
 #include "DataDragon.h"
 #include <fstream>
+#include <map>
 
 DataDragon::DataDragon() {
 
@@ -20,9 +21,9 @@ DataDragon::DataDragon() {
 
     std::cout << "Successfully loaded item data!\n";
 
-    std::ifstream runeFile("data/12.6.1/data/en_US/runesReforged.json");
+    std::ifstream runeFile("data/perks.json");
     if (!runeFile.is_open()) {
-        std::cerr << "Could not open runesReforged.json";
+        std::cerr << "Could not open perks.json";
         return;
     }
     runeFile >> runes;
@@ -45,22 +46,24 @@ std::string DataDragon::getItemName(int itemID)
     return items["data"][id]["name"].get<std::string>();
 }
 
-std::string DataDragon::getRuneName(int runeID, int styleID){
-    int i = 0;
-    while (runes[i]["id"] != styleID){
-        std::cout << runes[i]["id"] << "\n";
-        i++;
-        if (i > 20){
-            break;
-        }
+std::string DataDragon::getRuneName(int runeID){
+    if (runeHashmap[runeID]){
+        std::cout << "Rune ID found in hashmap: " << runeID << std::endl;
+        return runes[runeHashmap[runeID]]["name"].get<std::string>();
     }
-    int j = 0;
-    std::string id = std::to_string(runeID);
-    while (!runes[i]["slots"][j]["runes"].contains(id)){
-        j++;
-        if (j > 20){
-            break;
+    else{
+        int i = 0;
+        while (runes[i]["id"] != runeID) {
+            std::cout << runes[i]["id"] << " != " << runeID << std::endl;
+            runeHashmap[runeID] = i;
+            i++;
+            if (i >= runes.size()) {
+                std::cerr << "Rune ID not found: " << runeID << std::endl;
+                return "Unknown Rune";
+            }
         }
+        std::cout << "Rune ID not found in hashmap, adding: " << runeID << std::endl;
+        return runes[runeHashmap[runeID]+1]["name"].get<std::string>();
     }
-    return runes[i]["slots"][j]["runes"]["name"].get<std::string>();
+    
 }

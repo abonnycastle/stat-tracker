@@ -85,13 +85,15 @@ int main() {
                 stats.item4 = data.getItemName(match["info"]["participants"][participant]["item4"]);
                 stats.item5 = data.getItemName(match["info"]["participants"][participant]["item5"]);
                 stats.item6 = data.getItemName(match["info"]["participants"][participant]["item6"]);
+                stats.mainKeyStone = data.getRuneName(match["info"]["participants"][participant]["perks"]["styles"][0]["selections"][0]["perk"]);
+                stats.mainRune1 = data.getRuneName(match["info"]["participants"][participant]["perks"]["styles"][0]["selections"][1]["perk"]);
+                stats.mainRune2 = data.getRuneName(match["info"]["participants"][participant]["perks"]["styles"][0]["selections"][2]["perk"]);
+                stats.mainRune3 = data.getRuneName(match["info"]["participants"][participant]["perks"]["styles"][0]["selections"][3]["perk"]);
+                stats.subStyle = data.getRuneName(match["info"]["participants"][participant]["perks"]["styles"][1]["style"]);
+                stats.subRune1 = data.getRuneName(match["info"]["participants"][participant]["perks"]["styles"][1]["selections"][0]["perk"]);
+                stats.subRune2 = data.getRuneName(match["info"]["participants"][participant]["perks"]["styles"][1]["selections"][1]["perk"]);
+                
                 stats.displayStats();
-
-                int mainRuneID = match["info"]["participants"][participant]["perks"]["styles"][0]["selections"][0]["perk"];
-                int mainStyleID = match["info"]["participants"][participant]["perks"]["styles"][0]["style"];
-                std::cout << mainRuneID << "\n";
-                std::cout << mainStyleID << "\n";
-                std::cout << data.getRuneName(mainRuneID, mainStyleID);
             break;
         }
     }
